@@ -1,11 +1,12 @@
-defmodule Types.Chromosome do
+defmodule Chromosome do
 
   @type t :: %__MODULE__{
     genes: Enum.t,
     size: integer(),
     fitness: number(),
-    ages: integer()
+    age: integer()
   }
+
   @enforce_keys :genes
-  defstruct [:genes, :size: 0, :fitness: 0, :age: 0]
+  defstruct [:genes, size: 0, fitness: 0, age: 0]
 end

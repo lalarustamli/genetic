@@ -1,11 +1,20 @@
-genotype = fn -> for _ <- 1..1000, do: Enum.random(0..1) end
+defmodule OneMax do
+  @behaviour Problem
 
-max_fitness = 1000
+  @impl true
+  def genotype do
+    genes = for _ <- 1..42, do: Enum.random(0..1)
+    %Chromosome{genes: genes, size: 42}
+  end
 
-#Maximum sum of a bitstring of a length N
-fitness_function = fn chromosome -> Enum.sum(chromosome) end
+  @impl true
+  def fitness_function(chromosome), do: Enum.sum(chromosome.genes)
 
-soln = Genetic.run(fitness_function, genotype, max_fitness)
+  @impl true
+  def terminate?(population), do: hd(population).fitness == 42
+end
+
+soln = Genetic.run(OneMax)
 
 IO.write("\n")
 IO.inspect(soln)
